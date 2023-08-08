@@ -1,5 +1,6 @@
 struct DSU {
   vector<int> f, siz;
+  
   DSU(int n) {
     f.resize(n);
     iota(f.begin(), f.end(), 0);

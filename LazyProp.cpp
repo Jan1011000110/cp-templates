@@ -14,7 +14,7 @@ struct segTree {
   }
   
   void propagate(int x, int tl, int tr) {
-    if (upd[x] == 0 || tr - tl == 1) {
+    if (upd[x] == 0 or tr - tl == 1) {
       return;
     }
     int m = (tl + tr) / 2;
@@ -27,12 +27,12 @@ struct segTree {
   
   void modify(int l, int r, int x, int tl, int tr, int k) {
     propagate(x, tl, tr);
-    if (tl >= l && tr <= r) {
+    if (tl >= l and tr <= r) {
       t[x] += (tr - tl) * k;
       upd[x] += k;
       return;
     }
-    if (tl >= r || tr <= l) {
+    if (tl >= r or tr <= l) {
       return;
     }
     int m = (tl + tr) / 2;
@@ -47,10 +47,10 @@ struct segTree {
   
   int query(int l, int r, int x, int tl, int tr) {
     propagate(x, tl, tr);
-    if (tl >= l && tr <= r) {
+    if (tl >= l and tr <= r) {
       return t[x];
     }
-    if (tl >= r || tr <= l) {
+    if (tl >= r or tr <= l) {
       return null_value;
     }
     int m = (tl + tr) / 2;
