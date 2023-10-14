@@ -48,10 +48,11 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 const ll N = 2e5+5, INF = 1e18, MOD = 1e9+7;
 
 
+mt19937 rng(time(0));
+
 int rand(int a, int b) {
-    return a + rand() % (b - a + 1);
+    return a + rng() % (b - a + 1);
 }
-//mt19937 gen(time(0));
 
 int main(int argc, char* argv[]) {
   srand(atoi(argv[1])); // atoi(s) converts an array of chars to int
