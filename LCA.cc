@@ -2,14 +2,14 @@ struct LCA {
   int n, LOG;
   vector<vector<int>> g;
   vector<vector<int>> up;
-  vector<int> dep;
+  vector<int> depth;
   
   LCA(int n_) {
     n = n_;
     LOG = 63 - __builtin_clzll(n);
     g.resize(n, {});
     up.resize(n, vector<int>(LOG));
-    dep.resize(n);
+    depth.resize(n);
   }
   
   void add_edge(int a, int b) {
@@ -23,25 +23,25 @@ struct LCA {
     }
     for (auto u : g[v]) {
       if (u != p) {
-        dep[u] = dep[v] + 1;
+        depth[u] = depth[v] + 1;
         up[u][0] = v;
         build(u, v);
       }
     }
   }
   
-  int jump(int v, int k) {
+  int jump(int a, int k) {
     for (int j = LOG - 1; j >= 0; j--) {
       if (k >> j & 1) {
-        v = up[v][j];
+        a = up[a][j];
       }
     }
-    return v;
+    return a;
   }
   
   int lca(int a, int b) {
-    if (dep[a] < dep[b]) swap(a, b);
-    a = jump(a, dep[a] - dep[b]);
+    if (depth[a] < depth[b]) swap(a, b);
+    a = jump(a, depth[a] - depth[b]);
     
     if (a == b) return a;
     
@@ -55,6 +55,6 @@ struct LCA {
   }
   
   int dist(int a, int b) {
-    return dep[a] + dep[b] - 2 * dep[lca(a, b)];
+    return depth[a] + depth[b] - 2*depth[lca(a, b)];
   }
 };
