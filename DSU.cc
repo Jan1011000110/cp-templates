@@ -15,6 +15,7 @@ struct DSU {
 		x = find(x);
 		y = find(y);
 		if (x == y) return false;
+		if (siz[x] < siz[y]) swap(x, y);
 		siz[x] += siz[y];
 		f[y] = x;
 		return true;

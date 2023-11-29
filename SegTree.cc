@@ -1,43 +1,49 @@
 template<typename T>
 struct segTree {
-  int size = 1; 
-  int null_value = 0; // CHANGE THIS
-  vector<int> t;
+  int size = 1;
+  T null_value = 0;
+  vector<T> t;
+
   segTree(int n) {
     while (size < n) size *= 2;
-    t.assign(2 * size, null_value);
+    t.assign(2*size, null_value);
   }
-  int merge(int a, int b) { // CHANGE THIS
+
+  T merge(T a, T b) {
     return a + b;
   }
-  void modify(int i, int x, int tl, int tr, int k) {
-    if (tr - tl == 1) {
-      t[x] = k;
+
+  void modify(int v, int l, int r, int x, T k) {
+    if (r - l == 1) {
+      t[v] = k;
       return;
     }
-    int m = (tl + tr) / 2;
-    if (i < m) {
-      modify(i, 2 * x + 1, tl, m, k);
-    } else {
-      modify(i, 2 * x + 2, m, tr, k);
+    int m = (l + r) / 2;
+    if (x < m) {
+      modify(2*v + 1, l, m, x, k);
     }
-    t[x] = merge(t[2 * x + 1], t[2 * x + 2]);
-  }
-  void modify(int i, int k) {
-    modify(i, 0, 0, size, k);
-  }
-  
-  int query(int l, int r, int x, int tl, int tr) {
-    if (tl >= l && tr <= r) {
-      return t[x];
+    else {
+      modify(2*v + 2, m, r, x, k);
     }
-    if (tl >= r || tr <= l) {
+    t[v] = merge(t[2*v + 1], t[2*v + 2]);
+  }
+
+  void modify(int x, T k) {
+    modify(0, 0, size, x, k);
+  }
+
+  T query(int v, int l, int r, int x, int y) {
+    if (l >= x and r <= y) {
+      return t[v];
+    }
+    if (l >= y or r <= x) {
       return null_value;
     }
-    int m = (tl + tr) / 2;
-    return merge(query(l, r, 2 * x + 1, tl, m), query(l, r, 2 * x + 2, m, tr));
+    int m = (l + r) / 2;
+    return merge(query(2*v + 1, l, m, x, y), query(2*v + 2, m, r, x, y));
   }
-  int query(int l, int r) {
-    return query(l, r, 0, 0, size);
+
+  T query(int x, int y) {
+    return query(0, 0, size, x, y);
   }
 };
