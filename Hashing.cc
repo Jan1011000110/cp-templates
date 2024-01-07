@@ -6,7 +6,9 @@ struct Hash {
 	vector<long long> pw;
 	vector<long long> hash;
 
-	void build(string s, long long B = 329483, long long M = 1027799999) {
+	void build(string s, long long B_ = 329483, long long M_ = 1027799999) {
+		B = B_;
+		M = M_;
 		n = (int) s.size();
 		pw = vector<long long>(n + 1);
 		hash = vector<long long>(n + 1);
@@ -37,10 +39,11 @@ struct MultiHash {
 	vector<long long> MODS = {1027799999, 998244353};
 
 	int n;
-	vector<Hash> hashes(COUNT_HASHES);
+	vector<Hash> hashes;
 
 	void build(string s) {
 		n = (int) s.size();
+		hashes = vector<Hash>(COUNT_HASHES);
 		for (int i = 0; i < COUNT_HASHES; ++i) {
 			hashes[i].build(s, POLYS[i], MODS[i]);
 		}

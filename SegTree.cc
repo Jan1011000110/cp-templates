@@ -1,12 +1,12 @@
 template<typename T>
-struct segTree {
+struct SegmentTree {
   int size = 1;
   T null_value = 0;
   vector<T> t;
 
-  segTree(int n) {
+  SegmentTree(int n) {
     while (size < n) size *= 2;
-    t.assign(2*size, null_value);
+    t.assign(2 * size, null_value);
   }
 
   T merge(T a, T b) {
@@ -20,12 +20,12 @@ struct segTree {
     }
     int m = (l + r) / 2;
     if (x < m) {
-      modify(2*v + 1, l, m, x, k);
+      modify(2 * v + 1, l, m, x, k);
     }
     else {
-      modify(2*v + 2, m, r, x, k);
+      modify(2 * v + 2, m, r, x, k);
     }
-    t[v] = merge(t[2*v + 1], t[2*v + 2]);
+    t[v] = merge(t[2 * v + 1], t[2 * v + 2]);
   }
 
   void modify(int x, T k) {
@@ -40,7 +40,7 @@ struct segTree {
       return null_value;
     }
     int m = (l + r) / 2;
-    return merge(query(2*v + 1, l, m, x, y), query(2*v + 2, m, r, x, y));
+    return merge(query(2 * v + 1, l, m, x, y), query(2 * v + 2, m, r, x, y));
   }
 
   T query(int x, int y) {
