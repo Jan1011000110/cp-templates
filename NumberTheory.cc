@@ -18,8 +18,10 @@ void sieve() {
       pr.push_back(i);
       lp[i] = i;
     }
-    for (int j = 0; j < sz(pr) && i * pr[j] < N && pr[j] <= lp[i]; j++) {
-      lp[i * pr[j]] = pr[j];
+    for (auto p : pr) {
+      if (i * p >= N) break;
+      lp[i * p] = p;
+      if (lp[i] == p) break;
     }
   }
 }

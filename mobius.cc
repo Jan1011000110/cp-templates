@@ -7,11 +7,12 @@ void sieve() {
       pr.emplace_back(i);
       mu[i] = -1;
     }
-    for (int j = 0; i * pr[j] < N; ++j) {
-      lp[i * pr[j]] = pr[j];
-      mu[i * pr[j]] = -mu[i];
-      if (pr[j] == lp[i]) {
-        mu[i * pr[j]] = 0;
+    for (auto p : pr) {
+      if (i * p >= N) break;
+      lp[i * p] = p;
+      mu[i * p] = -mu[i];
+      if (lp[i] == p) {
+        mu[i * p] = 0;
         break;
       }
     }
