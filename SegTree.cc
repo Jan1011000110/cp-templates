@@ -18,7 +18,7 @@ struct SegmentTree {
       t[v] = k;
       return;
     }
-    int m = (l + r) / 2;
+    int m = (l + r) >> 1;
     if (x < m) {
       modify(2 * v + 1, l, m, x, k);
     }
@@ -39,7 +39,7 @@ struct SegmentTree {
     if (l >= y or r <= x) {
       return null_value;
     }
-    int m = (l + r) / 2;
+    int m = (l + r) >> 1;
     return merge(query(2 * v + 1, l, m, x, y), query(2 * v + 2, m, r, x, y));
   }
 

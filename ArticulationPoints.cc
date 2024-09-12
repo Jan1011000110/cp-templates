@@ -12,7 +12,7 @@ void Dfs(int v, int p) {
     else {
       Dfs(u, v);
       low[v] = min(low[v], low[u]);
-      if (low[v] <= low[u] and p != -1) {
+      if (tin[v] <= low[u] and p != -1) {
         // process node v
       }
       child += 1;

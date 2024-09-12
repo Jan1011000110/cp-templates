@@ -11,7 +11,7 @@ void Dfs(int v, int p) {
     else {
       Dfs(u, v);
       low[v] = min(low[v], low[u]);
-      if (low[v] < low[u]) {
+      if (tin[v] < low[u]) {
         // process edge (v, u)
       }
     }

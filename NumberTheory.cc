@@ -11,20 +11,20 @@ bool isPrime(ll n) {
   return true; 
 } 
     
-vector<int> pr, lp(N);
-void sieve() {
-  for (int i = 2; i < N; i++) {
-    if (lp[i] == 0) {
-      pr.push_back(i);
-      lp[i] = i;
-    }
-    for (auto p : pr) {
-      if (i * p >= N) break;
-      lp[i * p] = p;
-      if (lp[i] == p) break;
+  vector<int> pr, lp(N);
+  void sieve() {
+    for (int i = 2; i < N; i++) {
+      if (lp[i] == 0) {
+        pr.push_back(i);
+        lp[i] = i;
+      }
+      for (auto p : pr) {
+        if (i * p >= N) break;
+        lp[i * p] = p;
+        if (lp[i] == p) break;
+      }
     }
   }
-}
 
 bool isPrime(int n) {
   return lp[n] == n;

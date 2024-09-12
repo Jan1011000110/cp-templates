@@ -1,39 +1,35 @@
-const long long INF = 1e18, MOD = 1e9+7;
+const ll INF = 1e18, MOD = 1e9+7;
 
-vector<long long> fact, inv_fact;
+vector<int> fact, inv_fact;
 
-long long mult(long long a, long long b) {
-  return (a * b) % MOD;
+int mult(int a, int b) {
+  return (1LL * a * b) % MOD;
 }
 
-long long add(long long a, long long b) {
-  long long s = a + b;
-  while (s >= MOD) s -= MOD;
-  return s;
+int add(int a, int b) {
+  return (a + b) % MOD;
 }
 
-long long sub(long long a, long long b) {
-  long long s = a - b;
-  while (s < 0) s += MOD;
-  return s;
+int sub(int a, int b) {
+  return ((a - b) % MOD + MOD) % MOD;
 }
 
-long long mpow(long long a, long long b) {
-  return not b ? 1LL : mult(mpow(mult(a, a), b / 2), (b & 1 ? a : 1LL));
+int mpow(int a, ll b) {
+  return not b ? 1LL : mult(mpow(mult(a, a), b >> 1), (b & 1 ? a : 1LL));
 }
 
-long long inv(long long a) {
+int inv(int a) {
   return mpow(a, MOD - 2);
 }
 
-long long C(long long a, long long b) {
+int C(int a, int b) {
   if (b > a) return 0;
   return mult(fact[a], mult(inv_fact[b], inv_fact[a - b]));
 }
 
 void init(int N) {
-  fact = vector<long long>(N+1);
-  inv_fact = vector<long long>(N+1);
+  fact = vector<int>(N+1);
+  inv_fact = vector<int>(N+1);
   fact[0] = inv_fact[0] = 1;
   for (int i = 1; i <= N; i++) {
     fact[i] = mult(fact[i - 1], i);

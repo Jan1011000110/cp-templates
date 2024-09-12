@@ -11,5 +11,5 @@ struct Point {
   friend Point operator - (const Point& a, const Point& b) { return Point(a.x - b.x, a.y - b.y); }
 
   friend T dot(const Point& a, const Point& b) { return a.x * b.x + a.y * b.y; }
-  friend T cross(const Point& a, const Point& b) { return a.x * b.y - a.y * b.x; }
+  friend T cross(const Point& a, const Point& b) { return a.x * b.y - a.y * b.x; } // cross(a,b)<=0 <=> b is on r of a
 };

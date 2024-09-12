@@ -17,7 +17,7 @@ struct LazySegmentTree {
 		if (upd[v] == 0 or r - l == 1) {
 			return;
 		}
-		int m = (l + r) / 2;
+		int m = (l + r) >> 1;
 		
 		t[2 * v + 1] += upd[v] * (m - l);
 		t[2 * v + 2] += upd[v] * (r - m);
@@ -41,7 +41,7 @@ struct LazySegmentTree {
 			return;
 		}
 		
-		int m = (l + r) / 2;
+		int m = (l + r) >> 1;
 		push(v, l, r);
 		modify(2 * v + 1, l, m, x, y, k);
 		modify(2 * v + 2, m, r, x, y, k);
@@ -59,7 +59,7 @@ struct LazySegmentTree {
 		if (l >= y or r <= x) {
 			return null_value;
 		}
-		int m = (l + r) / 2;
+		int m = (l + r) >> 1;
 		push(v, l, r);
 		return merge(query(2 * v + 1, l, m, x, y), query(2 * v + 2, m, r, x, y));
 	}
