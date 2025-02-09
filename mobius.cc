@@ -3,8 +3,8 @@ void sieve() {
   mu[1] = 1;
   for (int i = 2; i < N; ++i) {
     if (lp[i] == 0) {
+      pr.push_back(i);
       lp[i] = i;
-      pr.emplace_back(i);
       mu[i] = -1;
     }
     for (auto p : pr) {
