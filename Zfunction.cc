@@ -6,9 +6,9 @@ vector<int> z_function(const string &s) {
 		while (i + z[i] < sz(s) and s[z[i]] == s[i + z[i]]) {
 			z[i] += 1;
 		}
-		if (i + z[i] > r) {
+		if (i + z[i] - 1 > r) {
 			l = i;
-			r = i + z[i];
+			r = i + z[i] - 1;
 		}
 	}
 	return z;
