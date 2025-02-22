@@ -1,8 +1,8 @@
-struct fenwTree {
+struct BIT {
   int n;
   vector<int> fen;
-  void init(int N) {
-    n = N;
+  BIT(int n_) {
+    n = n_;
     fen.assign(n + 1, 0LL);
   }
   void add(int v, int x) {

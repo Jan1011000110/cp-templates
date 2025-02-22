@@ -1,35 +1,35 @@
 struct Hash {
-	long long B;
-	long long M;
+  long long B;
+  long long M;
 
-	int n;
-	vector<long long> pw;
-	vector<long long> hash;
+  int n;
+  vector<long long> pw;
+  vector<long long> hash;
 
-	void build(string s, long long B_ = 329483, long long M_ = 1027799999) {
-		B = B_;
-		M = M_;
-		n = (int) s.size();
-		pw = vector<long long>(n + 1);
-		hash = vector<long long>(n + 1);
+  Hash(const string &s, long long B_ = 329483, long long M_ = 1027799999) {
+    B = B_;
+    M = M_;
+    n = (int) s.size();
+    pw = vector<long long>(n + 1);
+    hash = vector<long long>(n + 1);
 
-		pw[0] = 1;
-		for (int i = 1; i <= n; ++i) {
-			pw[i] = (pw[i - 1] * B) % M;
-		}
+    pw[0] = 1;
+    for (int i = 1; i <= n; ++i) {
+      pw[i] = (pw[i - 1] * B) % M;
+    }
 
-		for (int i = 0; i < n; ++i) {
-			hash[i + 1] = ((hash[i] * B) % M + s[i]) % M;
-		}
-	}
-	
-	long long get_hash(int left, int right) {
-		return ((hash[right + 1] - (hash[left] * pw[right - left + 1]) % M) + M) % M;
-	}
+    for (int i = 0; i < n; ++i) {
+      hash[i + 1] = ((hash[i] * B) % M + s[i]) % M;
+    }
+  }
+  
+  long long get_hash(int left, int right) {
+    return ((hash[right + 1] - (hash[left] * pw[right - left + 1]) % M) + M) % M;
+  }
 
-	long long get_hash() {
-		return get_hash(0, n - 1);
-	}
+  long long get_hash() {
+    return get_hash(0, n - 1);
+  }
 };
 
 struct MultiHash {
@@ -45,7 +45,7 @@ struct MultiHash {
 		n = (int) s.size();
 		hashes = vector<Hash>(COUNT_HASHES);
 		for (int i = 0; i < COUNT_HASHES; ++i) {
-			hashes[i].build(s, POLYS[i], MODS[i]);
+			hashes[i] = Hash(s, POLYS[i], MODS[i]);
 		}
 	}
 

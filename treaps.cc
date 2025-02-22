@@ -1,19 +1,23 @@
 typedef struct item* pitem;
 
 struct item {
-  char c;
-  int prio, cnt;
+  int prio, cnt, val, sum;
   bool rev;
   pitem l, r;
-  item(char c_) : c(c_), prio(rand()), cnt(1), rev(false), l(nullptr), r(nullptr) {}
+  item(int val_) : prio(rand()), cnt(1), val(val_), sum(val_), rev(false), l(nullptr), r(nullptr) {}
 };
 
 int cnt(pitem t) {
   return not t ? 0 : t->cnt;
 }
 
+int sum(pitem t) {
+  return not t ? 0 : t->sum;
+}
+
 void update(pitem t) {
   t->cnt = cnt(t->l) + cnt(t->r) + 1;
+  t->sum = sum(t->l) + sum(t->r) + t->val;
 }
 
 void push(pitem t) {
@@ -25,7 +29,7 @@ void push(pitem t) {
   }
 }
 
-void split(pitem t, pitem &l, pitem &r, int x) { // we split t into two parts, l contains all the nodes with key<=x 
+void split(pitem t, pitem &l, pitem &r, int x) {
   push(t);
   if (not t) {
     l = r = nullptr;
@@ -60,19 +64,28 @@ void merge(pitem &t, pitem l, pitem r) {
   update(t);
 }
 
-void reverse(pitem t, int l, int r) {
+int query(pitem t, int x) {
+  push(t);
+  if (not t or x == 0) {
+    return 0;
+  }
+  if (cnt(t->l) + 1 <= x) {
+    return sum(t->l) + t->val + query(t->r, x - cnt(t->l) - 1);
+  }
+  else {
+    return query(t->l, x);
+  }
+}
+
+int query(pitem t, int l, int r) {
+  return query(t, r) - query(t, l - 1);
+}
+
+void reverse(pitem &t, int l, int r) {
   pitem t1, t2, t3;
-  split(t, t1, t2, l);
+  split(t, t1, t2, l - 1);
   split(t2, t2, t3, r - l + 1);
   t2->rev ^= 1;
   merge(t, t1, t2);
   merge(t, t, t3);
-}
-
-void output(pitem t) {
-  if (not t) return;
-  push(t);
-  output(t->l);
-  cout << t->c;
-  output(t->r);
 }
