@@ -14,7 +14,7 @@ int sub(int a, int b) {
   return ((a - b) % MOD + MOD) % MOD;
 }
 
-int mpow(int a, ll b) {
+int mpow(int a, long long b) {
   return not b ? 1LL : mult(mpow(mult(a, a), b >> 1), (b & 1 ? a : 1LL));
 }
 
