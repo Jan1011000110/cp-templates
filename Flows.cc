@@ -1,4 +1,4 @@
-
+// Optimal
 struct Dinic {
   using T = long long;
 
@@ -79,3 +79,43 @@ struct Dinic {
     return flow;
   }
 };
+
+
+// Suboptimal
+
+int bfs(int s, int t, vector<int> &p) {
+  p = vector<int>(n, -1);
+  p[s] = -2;
+  queue<pair<int, int>> q;
+  q.push({0, INF});
+  while (not q.empty()) {
+    auto [v, f] = q.front();
+    q.pop();
+    for (auto u : g[v]) {
+      if (p[u] == -1 and c[v][u]) {
+        f = min(f, c[v][u]);
+        p[u] = v;
+        if (u == t) {
+          return f;
+        }
+        q.push({u, f});
+      }
+    }
+  }
+  return 0;
+} 
+
+int max_flow(int s, int t) {
+  vector<int> p;
+  int flow = 0, add_flow;
+  while (add_flow = bfs(s, t, p)) {
+    flow += add_flow;
+    int v = t;
+    while (v != s) {
+      c[p[v]][v] -= add_flow;
+      c[v][p[v]] += add_flow;
+      v = p[v];
+    }
+  }
+  return flow;
+} 

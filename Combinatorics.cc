@@ -23,16 +23,19 @@ int inv(int a) {
 }
 
 int C(int a, int b) {
-  if (b > a) return 0;
+  if (b > a or b < 0) return 0;
   return mult(fact[a], mult(inv_fact[b], inv_fact[a - b]));
 }
 
 void init(int N) {
   fact = vector<int>(N+1);
   inv_fact = vector<int>(N+1);
-  fact[0] = inv_fact[0] = 1;
+  fact[0] = 1;
   for (int i = 1; i <= N; i++) {
     fact[i] = mult(fact[i - 1], i);
-    inv_fact[i] = inv(fact[i]);
+  }
+  inv_fact[N] = inv(fact[N]);
+  for (int i = N - 1; i >= 0; --i) {
+    inv_fact[i] = mult(inv_fact[i + 1], i + 1);
   }
 }

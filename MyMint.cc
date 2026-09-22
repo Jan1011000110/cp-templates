@@ -1,3 +1,4 @@
+
 struct mint {
   int v;
   explicit operator int() const { return v; }

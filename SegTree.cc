@@ -47,3 +47,5 @@ struct SegmentTree {
     return query(0, 0, size, x, y);
   }
 };
+
+

@@ -1,12 +1,13 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> 
 using namespace std;
+#define int long long
 #define ll long long
 #define fi first
 #define se second
 #define sz(a) (int) a.size()
 #define endl '\n'
 #define dbg(a) cerr << #a << " = " << a << endl;
-#define print(a) for (auto x : a) cerr << x << " "; cerr << endl;
+#define print(a) cerr << #a << " = {"; for (auto x_ : a) cerr << x_ << " "; cerr << "}" << endl;
 
 const long long INF = 1e18, MOD = 998244353;
 
