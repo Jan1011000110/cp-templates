@@ -89,3 +89,27 @@ void reverse(pitem &t, int l, int r) {
   merge(t, t1, t2);
   merge(t, t, t3);
 }
+
+
+
+
+void split(pitem t, pitem &l, pitem &r, int x) {
+  if (not t) {
+    l = r = nullptr;
+    return;
+  }
+  if (1 + cnt(t->l) <= x) {
+    split(t->r, t->r, r, x - cnt(t->l) - 1);
+    l = t;
+  }
+  else {
+    split(t->l, l, t->l, x); 
+    r = t;
+  }
+
+  update(t);
+}
+
+void merge(pitem &t, pitem l, pitem r) {
+
+}

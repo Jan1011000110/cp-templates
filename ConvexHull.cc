@@ -21,3 +21,4 @@ vector<Point> convex_hull(vector<Point> points) {
 	}
 	return hull;
 }
+

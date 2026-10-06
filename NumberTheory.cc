@@ -29,3 +29,5 @@ void sieve() {
 bool isPrime(int n) {
   return lp[n] == n;
 }
+
+
