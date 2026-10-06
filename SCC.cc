@@ -1,5 +1,5 @@
 
-int main() {
+signed main() {
 	int n, m;
 	cin >> n >> m;
 	vector<vector<int>> g(n), rev_g(n);
@@ -28,7 +28,7 @@ int main() {
 			topo(i);
 		}
 	}
-	reverse(order.begin() order.end());
+	reverse(order.begin(), order.end());
 
 	vector<int> root(n, -1);
 	function<void(int, int)> dfs = [&](int v, int org) {
@@ -47,7 +47,6 @@ int main() {
 	}
 
 	vector<vector<int>> scc(n);
-	
 	for (int v = 0; v < n; ++v) {
 		for (auto u : g[v]) {
 			if (root[v] != root[u]) {
@@ -55,5 +54,4 @@ int main() {
 			}
 		}
 	}
-
 }
